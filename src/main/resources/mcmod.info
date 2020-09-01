@@ -1,0 +1,16 @@
+[
+{
+  "modid": "dtrix-lib",
+  "name": "DiabolicaTrix's Lib",
+  "description": "Library with multiple render utilities and other helpers.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://dtrix.dev",
+  "updateUrl": "",
+  "authorList": ["DiabolicaTrix"],
+  "credits": "",
+  "logoFile": "./dtrix-lib-logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

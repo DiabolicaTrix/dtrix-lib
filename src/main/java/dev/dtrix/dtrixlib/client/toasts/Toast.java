@@ -2,33 +2,26 @@ package dev.dtrix.dtrixlib.client.toasts;
 
 import dev.dtrix.dtrixlib.Constants;
 import dev.dtrix.dtrixlib.StringUtils;
+import dev.dtrix.dtrixlib.util.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.toasts.GuiToast;
 import net.minecraft.client.gui.toasts.IToast;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.GuiModList;
-import net.voxelindustry.brokkgui.paint.Color;
-import net.voxelindustry.brokkgui.util.StringCountUtils;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.util.text.ITextComponent;
 
 public class Toast implements IToast {
 
     private IToast.Visibility visibility = Visibility.SHOW;
     private long duration;
     private Types type;
-    private String message;
+    private ITextComponent component;
 
-    public Toast(Types type, String message, long duration) {
+    public Toast(Types type, ITextComponent component, long duration) {
         this.duration = duration;
         this.type = type;
-        this.message = I18n.format(message);
+        this.component = component;
     }
 
     @Override
@@ -38,10 +31,10 @@ public class Toast implements IToast {
         }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F);
-        Gui.drawRect(0, 3, 160, 35, Color.fromHex("FFFFFF").toRGBAInt());
+        Gui.drawRect(0, 3, 160, 35, ColorUtils.fromHexToIntRGBA("FFFFFF"));
         Gui.drawRect(0, 3, 32, 35, type.getColor());
 
-        String str = StringUtils.abbreviateSplitString(toastGui.getMinecraft().fontRenderer, this.message, 122, 3);
+        String str = StringUtils.abbreviateSplitString(toastGui.getMinecraft().fontRenderer, this.component.getFormattedText(), 122, 3);
         toastGui.getMinecraft().fontRenderer.drawSplitString(str, 35, 6, 122,0x000000);
 
         this.type.draw(toastGui, 0, 3);
@@ -66,7 +59,7 @@ public class Toast implements IToast {
         }
 
         public int getColor() {
-            return Color.fromHex(color).toRGBAInt();
+            return ColorUtils.fromHexToIntRGBA(color);
         }
 
         public void draw(Gui gui, int x, int y) {

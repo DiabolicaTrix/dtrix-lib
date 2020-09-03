@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "com.jfrog.artifactory"
 
-version = '0.0.2'
+version = '0.0.3'
 group = 'dev.dtrix' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'dtrix-lib'
 
@@ -49,10 +49,10 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
-    compile(group: 'net.voxelindustry', name: 'brokkgui-binding-mc1.12', version: '1.0.0-63-SNAPSHOT')
 }
 
 jar {
+    exclude('dev/dtrix/dtrixlib/test/**')
     manifest {
         attributes([
             "Specification-Title": "dtrix-lib",

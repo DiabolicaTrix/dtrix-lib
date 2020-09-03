@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.GuiModList;
 import net.voxelindustry.brokkgui.paint.Color;
@@ -27,7 +28,7 @@ public class Toast implements IToast {
     public Toast(Types type, String message, long duration) {
         this.duration = duration;
         this.type = type;
-        this.message = message;
+        this.message = I18n.format(message);
     }
 
     @Override

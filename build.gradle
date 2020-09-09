@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "com.jfrog.artifactory"
 
-version = '0.0.3'
+version = '0.1.0'
 group = 'dev.dtrix' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'dtrix-lib'
 
@@ -49,6 +49,8 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
 
 jar {

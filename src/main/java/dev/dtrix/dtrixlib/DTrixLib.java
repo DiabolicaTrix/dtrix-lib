@@ -1,6 +1,7 @@
 package dev.dtrix.dtrixlib;
 
 import dev.dtrix.dtrixlib.common.CommonProxy;
+import dev.dtrix.dtrixlib.common.packets.PacketClientAction;
 import dev.dtrix.dtrixlib.common.packets.PacketSendToast;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -28,6 +29,7 @@ public class DTrixLib {
 
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MODID);
         network.registerMessage(PacketSendToast.Handler.class, PacketSendToast.class, 0, Side.CLIENT);
+        network.registerMessage(PacketClientAction.Handler.class, PacketClientAction.class, 1, Side.CLIENT);
 
     }
 

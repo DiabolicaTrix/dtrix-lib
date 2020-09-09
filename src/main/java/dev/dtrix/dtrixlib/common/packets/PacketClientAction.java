@@ -48,10 +48,10 @@ public class PacketClientAction implements IMessage {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                if(message.getPayload().hasKey("gui")) {
                    GuiScreen gui = GuiRegistry.getGui(message.getPayload().getString("gui"));
-                   if(Minecraft.getMinecraft().currentScreen != gui)
-                       Minecraft.getMinecraft().displayGuiScreen(gui);
                    if(gui instanceof IReceiver)
                        ((IReceiver) gui).handle(message.getPayload());
+                   if(Minecraft.getMinecraft().currentScreen != gui)
+                       Minecraft.getMinecraft().displayGuiScreen(gui);
                }
             });
             return null;

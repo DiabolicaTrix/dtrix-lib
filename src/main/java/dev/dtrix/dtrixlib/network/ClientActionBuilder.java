@@ -2,6 +2,7 @@ package dev.dtrix.dtrixlib.network;
 
 import dev.dtrix.dtrixlib.DTrixLib;
 import dev.dtrix.dtrixlib.common.packets.PacketClientAction;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,6 +43,16 @@ public class ClientActionBuilder {
 
     public ClientActionBuilder withFloat(String string) {
         payload.setString("float", string);
+        return this;
+    }
+
+    public ClientActionBuilder withPlayer(EntityPlayer player) {
+        payload.setUniqueId("player", player.getPersistentID());
+        return this;
+    }
+
+    public ClientActionBuilder withEntity(Entity entity) {
+        payload.setInteger("entity", entity.getEntityId());
         return this;
     }
 

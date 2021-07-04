@@ -34,6 +34,10 @@ public class InteractionMenu extends GuiScreen {
         degreesPerSegment = 360F / segments;
     }
 
+    public InteractionMenu(List<IInteractionAction> actions) {
+        this(actions, null);
+    }
+
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         GlStateManager.pushMatrix();
@@ -104,7 +108,7 @@ public class InteractionMenu extends GuiScreen {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        if(!GameSettings.isKeyDown(this.keyBinding)) {
+        if(keyBinding != null && !GameSettings.isKeyDown(this.keyBinding)) {
             mc.displayGuiScreen(null);
             actions.get(active).execute(Minecraft.getMinecraft().player);
         }

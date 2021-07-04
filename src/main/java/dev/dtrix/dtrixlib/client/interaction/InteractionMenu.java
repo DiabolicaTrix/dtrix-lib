@@ -9,14 +9,15 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class InteractionMenu extends GuiScreen {
 
     private final List<IInteractionAction> actions;
-    private final KeyBinding keyBinding;
     private int innerRadius = 20;
     private int outerRadius = 80;
     private int centerX;
@@ -27,9 +28,11 @@ public class InteractionMenu extends GuiScreen {
 
     private int active;
 
-    public InteractionMenu(List<IInteractionAction> actions, KeyBinding keyBinding) {
+    private Supplier<Boolean> shouldClose;
+
+    public InteractionMenu(List<IInteractionAction> actions, Supplier<Boolean> shouldClose) {
         this.actions = actions;
-        this.keyBinding = keyBinding;
+        this.shouldClose = shouldClose;
         segments = actions.size();
         degreesPerSegment = 360F / segments;
     }
@@ -108,7 +111,7 @@ public class InteractionMenu extends GuiScreen {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        if(keyBinding != null && !GameSettings.isKeyDown(this.keyBinding)) {
+        if(this.shouldClose != null && this.shouldClose.get()) {
             mc.displayGuiScreen(null);
             actions.get(active).execute(Minecraft.getMinecraft().player);
         }
